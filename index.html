@@ -5,27 +5,6 @@
 <title>Miniverse ✨</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    /* Shooting star */
-.shooting-star {
-    position: absolute;
-    width: 3px;
-    height: 100px;
-    background: linear-gradient(white, transparent);
-    opacity: 0.8;
-    transform: rotate(45deg);
-    animation: shoot 1s linear forwards;
-}
-
-@keyframes shoot {
-    from {
-        transform: translate(0,0) rotate(45deg);
-        opacity: 1;
-    }
-    to {
-        transform: translate(500px, 500px) rotate(45deg);
-        opacity: 0;
-    }
-}
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
 body {
@@ -44,7 +23,7 @@ body {
     position: relative;
 }
 
-/* Starfield using CSS + JS */
+/* Starfield */
 .star {
     position: absolute;
     width: 2px;
@@ -60,7 +39,7 @@ body {
     to { opacity: 1; }
 }
 
-/* Page title */
+/* Title */
 #page-title {
     font-weight: 700;
     font-size: 2em;
@@ -70,7 +49,7 @@ body {
     z-index: 1;
 }
 
-/* Joke/affirmation box */
+/* Box */
 #joke-box {
     background: rgba(0,0,0,0.6);
     padding: 30px;
@@ -131,6 +110,28 @@ button:hover {
     0% { transform: translateY(-50px) rotate(0deg); opacity: 1;}
     100% { transform: translateY(100vh) rotate(360deg); opacity: 0;}
 }
+
+/* Shooting star */
+.shooting-star {
+    position: absolute;
+    width: 3px;
+    height: 100px;
+    background: linear-gradient(white, transparent);
+    opacity: 0.8;
+    transform: rotate(45deg);
+    animation: shoot 1s linear forwards;
+}
+
+@keyframes shoot {
+    from {
+        transform: translate(0,0) rotate(45deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(500px, 500px) rotate(45deg);
+        opacity: 0;
+    }
+}
 </style>
 </head>
 <body>
@@ -138,12 +139,12 @@ button:hover {
 <h1 id="page-title">A little light for you ✨</h1>
 
 <div id="joke-box">Click the button</div>
-<button onclick="newJoke()">Tell Me Something today ✨</button>
+<button onclick="newJoke()">Tell Me Something New ✨</button>
 
-<footer id="signature"></footer>
+<footer id="signature">From, Jared</footer>
 
 <script>
-// --- Generate starfield ---
+// --- Starfield ---
 for(let i=0; i<100; i++){
     const star = document.createElement('div');
     star.className = 'star';
@@ -154,31 +155,23 @@ for(let i=0; i<100; i++){
     document.body.appendChild(star);
 }
 
-// --- Lines array: sci-fi, romantic, philosophical, affirmations ---
+// --- Lines: sci-fi, romantic, affirmations, philosophy ---
 const lines = [
-    // --- Positive / Romantic Sci-Fi ---
     "You are my favorite cosmic coincidence",
-    //"Ta-da!",
-    //"Have a superb day today!",
-    //"In a galaxy of infinite possibilities, you are a rare constellation of wonder.",
-    //"Somewhere right now, the universe is smiling because of you.",
-    //"Your presence illuminates the world",
+    "In a galaxy of infinite possibilities, you are a rare constellation of wonder.",
+    "Somewhere right now, the universe is smiling because of you.",
+    "Your presence illuminates the world",
     "The cosmos is within us. We are made of star-stuff",
-    " 'There is no such thing as an unsolvable problem' \n Sergei Korolev ",
-    " Cosmonautics has a boundless future, its prospects are boundless, like the Universe itself! \n Sergei Korolev ",
-    //"He who has a why to live can bear almost any how.",
-    //"Imagination is the highest form of research.",
-
-    // --- Whimsical Positive Affirmations ---
-    //"Believe in the magic you carry inside — it's real and unstoppable.",
-    //"Your curiosity and kindness ripple across galaxies, unseen but mighty.",
-    //"Imagine the impossible and then watch yourself achieve it.",
-    " :'( ",
-
-    
+    "'There is no such thing as an unsolvable problem' — Sergei Korolev",
+    "Cosmonautics has a boundless future, its prospects are boundless, like the Universe itself! — Sergei Korolev",
+    "Believe in the magic you carry inside — it's real and unstoppable.",
+    "Your curiosity and kindness ripple across galaxies, unseen but mighty.",
+    "Imagine the impossible and then watch yourself achieve it.",
+    "Thinking of you makes the stars feel closer.",
+    "You are the reason starlight feels warm."
 ];
 
-// --- Confetti function ---
+// --- Confetti ---
 function createConfetti() {
     for(let i=0; i<25; i++) {
         const confetti = document.createElement('div');
@@ -190,7 +183,17 @@ function createConfetti() {
     }
 }
 
-// --- Display new line ---
+// --- Shooting star ---
+function createShootingStar() {
+    const star = document.createElement('div');
+    star.className = 'shooting-star';
+    star.style.top = Math.random() * (window.innerHeight / 2) + 'px';
+    star.style.left = Math.random() * (window.innerWidth / 2) + 'px';
+    document.body.appendChild(star);
+    setTimeout(() => star.remove(), 1000);
+}
+
+// --- New line ---
 function newJoke() {
     const index = Math.floor(Math.random() * lines.length);
     const box = document.getElementById('joke-box');
@@ -201,8 +204,8 @@ function newJoke() {
         box.classList.add('show');
     }, 100);
 
-    // Trigger confetti for uplifting/romantic lines (first 20)
     if(index < 20) createConfetti();
+    createShootingStar();
 }
 
 // Initialize first line
