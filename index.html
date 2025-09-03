@@ -5,6 +5,27 @@
 <title>Miniverse ✨</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
+    /* Shooting star */
+.shooting-star {
+    position: absolute;
+    width: 3px;
+    height: 100px;
+    background: linear-gradient(white, transparent);
+    opacity: 0.8;
+    transform: rotate(45deg);
+    animation: shoot 1s linear forwards;
+}
+
+@keyframes shoot {
+    from {
+        transform: translate(0,0) rotate(45deg);
+        opacity: 1;
+    }
+    to {
+        transform: translate(500px, 500px) rotate(45deg);
+        opacity: 0;
+    }
+}
 @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
 body {
@@ -143,8 +164,8 @@ const lines = [
     //"Somewhere right now, the universe is smiling because of you.",
     //"Your presence illuminates the world",
     "The cosmos is within us. We are made of star-stuff",
-    " 'There is no such thing as an unsolvable problem' \n Sergei Korolev "
-    " Cosmonautics has a boundless future, its prospects are boundless, like the Universe itself! \n Sergei Korolev "
+    " 'There is no such thing as an unsolvable problem' \n Sergei Korolev ",
+    " Cosmonautics has a boundless future, its prospects are boundless, like the Universe itself! \n Sergei Korolev ",
     //"He who has a why to live can bear almost any how.",
     //"Imagination is the highest form of research.",
 
