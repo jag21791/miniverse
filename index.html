@@ -2,37 +2,35 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>A Little Light for You ✨</title>
+<title>Miniverse ✨</title>
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <style>
-    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
 
-    body {
-        font-family: 'Raleway', sans-serif;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-        margin: 0;
-        background: radial-gradient(ellipse at bottom, #0b0c10 0%, #1f2833 100%);
-        overflow: hidden;
-        color: white;
-        text-align: center;
-        padding: 20px;
-    }
-
-    body {
+body {
+    font-family: 'Raleway', sans-serif;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin: 0;
     background: black;
     overflow: hidden;
+    color: white;
+    text-align: center;
+    padding: 20px;
+    position: relative;
 }
 
+/* Starfield using CSS + JS */
 .star {
     position: absolute;
     width: 2px;
     height: 2px;
     background: white;
     border-radius: 50%;
+    opacity: 0.8;
     animation: twinkle 2s infinite alternate;
 }
 
@@ -41,63 +39,101 @@
     to { opacity: 1; }
 }
 
-    @keyframes starMove {
-        from {background-position: 0 0;}
-        to {background-position: -10000px 5000px;}
-    }
+/* Page title */
+#page-title {
+    font-weight: 700;
+    font-size: 2em;
+    margin-bottom: 20px;
+    text-align: center;
+    color: #ffccff;
+    z-index: 1;
+}
 
-    #joke-box {
-        background: rgba(0,0,0,0.6);
-        padding: 30px;
-        border-radius: 16px;
-        max-width: 500px;
-        font-size: 1.3em;
-        opacity: 0;
-        transform: scale(0.95);
-        transition: all 0.5s ease-in-out;
-        box-shadow: 0 0 20px rgba(255,255,255,0.2);
-    }
-    #joke-box.show {
-        opacity: 1;
-        transform: scale(1);
-    }
+/* Joke/affirmation box */
+#joke-box {
+    background: rgba(0,0,0,0.6);
+    padding: 30px;
+    border-radius: 16px;
+    max-width: 500px;
+    font-size: 1.3em;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: all 0.5s ease-in-out;
+    box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    z-index: 1;
+}
+#joke-box.show {
+    opacity: 1;
+    transform: scale(1);
+}
 
-    button {
-        margin-top: 25px;
-        padding: 12px 25px;
-        font-size: 1em;
-        border: none;
-        border-radius: 12px;
-        background-color: #ff4f81;
-        color: white;
-        cursor: pointer;
-        transition: 0.2s;
-    }
-    button:hover {
-        background-color: #ff6f9f;
-    }
+/* Button */
+button {
+    margin-top: 25px;
+    padding: 12px 25px;
+    font-size: 1em;
+    border: none;
+    border-radius: 12px;
+    background-color: #ff4f81;
+    color: white;
+    cursor: pointer;
+    transition: 0.2s;
+    z-index: 1;
+}
+button:hover {
+    background-color: #ff6f9f;
+}
 
-    .confetti {
-        position: absolute;
-        width: 10px;
-        height: 10px;
-        background: #FFD700;
-        animation: fall 2s linear forwards;
-        opacity: 0.8;
-        border-radius: 50%;
-    }
-    @keyframes fall {
-        0% { transform: translateY(-50px) rotate(0deg); opacity: 1;}
-        100% { transform: translateY(100vh) rotate(360deg); opacity: 0;}
-    }
+/* Signature */
+#signature {
+    position: fixed;
+    bottom: 15px;
+    right: 20px;
+    font-size: 0.9em;
+    color: #ffccff;
+    opacity: 0.7;
+    font-style: italic;
+    z-index: 1;
+}
+
+/* Confetti */
+.confetti {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    background: #FFD700;
+    animation: fall 2s linear forwards;
+    opacity: 0.8;
+    border-radius: 50%;
+}
+@keyframes fall {
+    0% { transform: translateY(-50px) rotate(0deg); opacity: 1;}
+    100% { transform: translateY(100vh) rotate(360deg); opacity: 0;}
+}
 </style>
 </head>
 <body>
 
-<div id="joke-box">Click the button to feel a little cosmic love and wonder!</div>
+<h1 id="page-title">A little light for you ✨</h1>
+
+<div id="joke-box">Click the button to feel cosmic love, wonder, and joy!</div>
 <button onclick="newJoke()">Tell Me Something New ✨</button>
 
+<footer id="signature">From, Jared</footer>
+
 <script>
+// --- Generate starfield ---
+for(let i=0; i<100; i++){
+    const star = document.createElement('div');
+    star.className = 'star';
+    star.style.top = Math.random() * window.innerHeight + 'px';
+    star.style.left = Math.random() * window.innerWidth + 'px';
+    star.style.width = Math.random()*3 + 1 + 'px';
+    star.style.height = star.style.width;
+    document.body.appendChild(star);
+}
+
+// --- Lines array: sci-fi, romantic, philosophical, affirmations ---
 const lines = [
     // --- Positive / Romantic Sci-Fi ---
     "You are my favorite cosmic coincidence :)",
@@ -114,8 +150,11 @@ const lines = [
     //"Believe in the magic you carry inside — it's real and unstoppable.",
     //"Your curiosity and kindness ripple across galaxies, unseen but mighty.",
     //"Imagine the impossible and then watch yourself achieve it.",
+
+    
 ];
 
+// --- Confetti function ---
 function createConfetti() {
     for(let i=0; i<25; i++) {
         const confetti = document.createElement('div');
@@ -127,6 +166,7 @@ function createConfetti() {
     }
 }
 
+// --- Display new line ---
 function newJoke() {
     const index = Math.floor(Math.random() * lines.length);
     const box = document.getElementById('joke-box');
@@ -137,11 +177,11 @@ function newJoke() {
         box.classList.add('show');
     }, 100);
 
-    // Confetti for affirmations/romantic lines (first 15+)
+    // Trigger confetti for uplifting/romantic lines (first 20)
     if(index < 20) createConfetti();
 }
 
-// initialize first line
+// Initialize first line
 newJoke();
 </script>
 
