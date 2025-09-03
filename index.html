@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>A Little Light for You ✨</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Raleway:wght@400;700&display=swap');
+
+    body {
+        font-family: 'Raleway', sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background: radial-gradient(ellipse at bottom, #0b0c10 0%, #1f2833 100%);
+        overflow: hidden;
+        color: white;
+        text-align: center;
+        padding: 20px;
+    }
+
+    body {
+    background: black;
+    overflow: hidden;
+}
+
+.star {
+    position: absolute;
+    width: 2px;
+    height: 2px;
+    background: white;
+    border-radius: 50%;
+    animation: twinkle 2s infinite alternate;
+}
+
+@keyframes twinkle {
+    from { opacity: 0.2; }
+    to { opacity: 1; }
+}
+
+    @keyframes starMove {
+        from {background-position: 0 0;}
+        to {background-position: -10000px 5000px;}
+    }
+
+    #joke-box {
+        background: rgba(0,0,0,0.6);
+        padding: 30px;
+        border-radius: 16px;
+        max-width: 500px;
+        font-size: 1.3em;
+        opacity: 0;
+        transform: scale(0.95);
+        transition: all 0.5s ease-in-out;
+        box-shadow: 0 0 20px rgba(255,255,255,0.2);
+    }
+    #joke-box.show {
+        opacity: 1;
+        transform: scale(1);
+    }
+
+    button {
+        margin-top: 25px;
+        padding: 12px 25px;
+        font-size: 1em;
+        border: none;
+        border-radius: 12px;
+        background-color: #ff4f81;
+        color: white;
+        cursor: pointer;
+        transition: 0.2s;
+    }
+    button:hover {
+        background-color: #ff6f9f;
+    }
+
+    .confetti {
+        position: absolute;
+        width: 10px;
+        height: 10px;
+        background: #FFD700;
+        animation: fall 2s linear forwards;
+        opacity: 0.8;
+        border-radius: 50%;
+    }
+    @keyframes fall {
+        0% { transform: translateY(-50px) rotate(0deg); opacity: 1;}
+        100% { transform: translateY(100vh) rotate(360deg); opacity: 0;}
+    }
+</style>
+</head>
+<body>
+
+<div id="joke-box">Click the button to feel a little cosmic love and wonder!</div>
+<button onclick="newJoke()">Tell Me Something New ✨</button>
+
+<script>
+const lines = [
+    // --- Positive / Romantic Sci-Fi ---
+    "You are my favorite cosmic coincidence.",
+    "Ta-da!",
+    "Have a superb day today!",
+    "In a galaxy of infinite possibilities, you are a rare constellation of wonder.",
+    "Somewhere right now, the universe is smiling because of you.",
+    "Your presence illuminates the world",
+    "The cosmos is within us. We are made of star-stuff.",
+    "He who has a why to live can bear almost any how.",
+    "Imagination is the highest form of research.",
+
+    // --- Whimsical Positive Affirmations ---
+    "Believe in the magic you carry inside — it's real and unstoppable.",
+    "Your curiosity and kindness ripple across galaxies, unseen but mighty.",
+    "Imagine the impossible and then watch yourself achieve it.",
+    //"You are more capable of wonder and joy than you know."
+];
+
+function createConfetti() {
+    for(let i=0; i<25; i++) {
+        const confetti = document.createElement('div');
+        confetti.className = 'confetti';
+        confetti.style.left = Math.random() * window.innerWidth + 'px';
+        confetti.style.background = `hsl(${Math.random()*360}, 70%, 60%)`;
+        document.body.appendChild(confetti);
+        setTimeout(() => confetti.remove(), 2000);
+    }
+}
+
+function newJoke() {
+    const index = Math.floor(Math.random() * lines.length);
+    const box = document.getElementById('joke-box');
+    box.classList.remove('show');
+
+    setTimeout(() => {
+        box.innerText = lines[index];
+        box.classList.add('show');
+    }, 100);
+
+    // Confetti for affirmations/romantic lines (first 15+)
+    if(index < 20) createConfetti();
+}
+
+// initialize first line
+newJoke();
+</script>
+
+</body>
+</html>
