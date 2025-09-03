@@ -204,8 +204,16 @@ function createShootingStar() {
 }
 
 // --- New line ---
+let lastIndex = -1;
+
 function newJoke() {
-    const index = Math.floor(Math.random() * lines.length);
+    let index;
+    do {
+        index = Math.floor(Math.random() * lines.length);
+    } while(index === lastIndex);
+
+    lastIndex = index;
+
     const box = document.getElementById('joke-box');
     box.classList.remove('show');
 
